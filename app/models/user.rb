@@ -1,6 +1,6 @@
 module App::Models
-  class Site < Rote::Model
+  class User < Rote::Model
     alias_method :to_s, :name
-    many_to_many :users
+    many_to_many :sites
   end
 end

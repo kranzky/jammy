@@ -46,11 +46,54 @@ def _get_sites(year)
         country: country
       }
       raise if year != args[:year]
-      next if Models::Site.where(year: args[:year], slug: args[:slug]).present?
-      site = Models::Site.new(args)
+      site = Models::Site.find_or_create(args)
       site.save
     end
     page += 1
     sleep 5
   end
+end
+
+def _get_users(site)
+  url =
+    case site.year
+      when 2014,2015,2016,2017 then "http://globalgamejam.org/#{year}/jam-sites"
+      when 2013 then "http://2013.globalgamejam.org/sites/2013/#{site.slug}/jammers"
+      when 2010,2011,2012 then "http://archive.globalgamejam.org/sites/#{site.year}/#{site.slug}/jammers"
+    end
+  return unless url
+  page = 0
+  while true
+    puts "Page #{page}"
+    break unless response = RestClient.get("#{url}?page=#{page}")
+    doc = Nokogiri::HTML(response.body)
+    rows =
+      case site.year
+        when 2017 then doc.css("div.l-main li.views-row")
+        when 2010,2011,2012,2013 then doc.css("table.views-view-grid td")
+      end
+    rows.each do |row|
+      next if row.css("div").length == 0
+      slug = File.basename(row.css("a").first['href'])
+      name = row.css("div.views-field-title").first.text
+      name.gsub!(/^[[:space:]]*/i, '')
+      name.gsub!(/[[:space:]]*$/i, '')
+      args = {
+        slug: slug,
+        name: name,
+        image: row.css("img").first['src']
+      }
+      user = Models::User.find_or_create(args)
+      user.save
+      next if site.users(reload: true).include?(user)
+      site.add_user(user)
+    end
+    page += 1
+    sleep 5
+    break
+  end
+end
+
+Models::Site.where(year: 2011).each do |site|
+  _get_users(site)
 end
