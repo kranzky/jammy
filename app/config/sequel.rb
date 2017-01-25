@@ -28,5 +28,3 @@ DB = Sequel.connect(ENV.fetch('DATABASE_URL'), logger: SemanticLogger['Sequel'],
 
 Sequel.extension :migration
 Sequel::Migrator.check_current(DB, './app/migrations')
-
-Sequel::Model.plugin :timestamps

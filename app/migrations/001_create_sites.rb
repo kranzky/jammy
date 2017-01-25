@@ -6,7 +6,6 @@ Sequel.migration do
       String :slug, null: false
       String :name, null: false
       String :country, null: false
-      String :thumbnail
       DateTime :created_at
       DateTime :updated_at
       index [:year, :slug], unique: true

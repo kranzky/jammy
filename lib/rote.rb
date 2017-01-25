@@ -25,6 +25,7 @@ module Rote
   Model = Class.new(Sequel::Model)
   class Model
     plugin :validation_helpers
+    plugin :timestamps
 
     def validate
     end

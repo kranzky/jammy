@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.4.0'
 
 # Language
-ruby '2.4.0'
+ruby '2.3.3'
 gem 'require_all', '~> 1.4.0'
 
 # Rack Server

@@ -10,7 +10,6 @@ Sequel.migration do
       column :slug, "text", :null=>false
       column :name, "text", :null=>false
       column :country, "text", :null=>false
-      column :thumbnail, "text"
       column :created_at, "timestamp without time zone"
       column :updated_at, "timestamp without time zone"
       
