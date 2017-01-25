@@ -1,0 +1,28 @@
+desc "Start the console"
+task :console do
+  exec 'irb -r ./app/boot.rb'
+end
+
+desc "Dump the schema"
+task :dump do
+  `sequel -D #{ENV.fetch("DATABASE_URL")} > app/config/1_schema.rb`
+end
+
+desc "Load the schema"
+task :load do
+  `sequel -m app/config #{ENV.fetch("DATABASE_URL")}`
+end
+
+desc "Run migrations"
+task :migrate, [:version] do |t, args|
+  require "sequel"
+  Sequel.extension :migration
+  db = Sequel.connect(ENV.fetch("DATABASE_URL"))
+  if args[:version]
+    puts "Migrating to version #{args[:version]}"
+    Sequel::Migrator.run(db, "app/migrations", target: args[:version].to_i)
+  else
+    puts "Migrating to latest"
+    Sequel::Migrator.run(db, "app/migrations")
+  end
+end
