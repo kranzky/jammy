@@ -28,10 +28,12 @@ gem 'yajl-ruby', '~> 1.3.0'
 gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
 
 group :development do
+  gem 'countries', '~> 2.0.6'
   gem 'github_changelog_generator', '~> 1.14.3'
   gem 'gemfile_updater', '~> 0.1.0'
   gem 'nokogiri', '~> 1.7.0.1'
   gem 'rest-client', '~> 2.0.0'
+  gem 'video_info', '~> 2.7'
 end
 
 group :test do

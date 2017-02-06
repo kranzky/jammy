@@ -15,3 +15,5 @@ log/*.log
 .byebug_history
 TODO.txt
 *swp
+env/*
+*psql

@@ -1,14 +1,15 @@
 Sequel.migration do
   change do
-    create_table :sites do
+    create_table :games do
       primary_key :id
       int :year, null: false
-      String :slug, null: false
+      String :url, null: false
       String :name, null: false
-      String :country, null: false
+      String :image, null: false
+      String :video
+      String :play
       DateTime :created_at
       DateTime :updated_at
-      index [:year, :slug], unique: true
     end
   end
 end
