@@ -187,7 +187,7 @@ def find_game(url, recurse=true)
   end
   return [url, :construct2] if response.body =~ /construct 2/i
   return [url, :twine] if response.body =~ /tw-story/i
-	return [url, :pico8] if response.body =~ /pico8/i
+  return [url, :pico8] if response.body =~ /pico8/i
   if doc.css("canvas").present?
     return [url, :html5]
   end
@@ -377,6 +377,8 @@ def scrape_country
     game.save
   end
 end
+
+# TODO: add key for sorting (filename of URL)
 
 # TODO: deal with delete/check/html5 games and eyeball the others
 

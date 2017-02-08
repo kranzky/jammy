@@ -5,7 +5,7 @@ ruby '2.3.3'
 gem 'require_all', '~> 1.4.0'
 
 # Rack Server
-gem 'puma', '~> 3.6.2'
+gem 'puma', '~> 3.7.0'
 
 # HTTP Framework
 gem 'sinatra', '~> 2.0.0.beta2'
@@ -13,7 +13,7 @@ gem 'sinatra-contrib', '~> 2.0.0.beta2'
 gem 'request_store', '~> 1.3.2'
 
 # ORM
-gem 'sequel', '~> 4.42.1'
+gem 'sequel', '~> 4.43.0'
 
 # Database
 gem 'pg', '~> 0.19.0'
