@@ -10,7 +10,7 @@ var
   env = require('./env-utils'),
   webpack = require('webpack'),
   webpackConfig = require('./webpack.prod.conf'),
-  targetPath = path.join(__dirname, '../dist')
+  targetPath = path.join(__dirname, '../public')
 
 console.log(' Built files are meant to be served over an HTTP server.')
 console.log(' Opening index.html over file:// won\'t work.\n')
