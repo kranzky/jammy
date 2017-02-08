@@ -1,8 +1,11 @@
+enable :cross_origin
+
 set :server, :puma
 set :root, File.expand_path('.')
 set :views, File.join(settings.root, 'app', 'templates')
 set :public_folder, File.join(settings.root, 'www')
 set :logger, false
+set :allow_origin, :any
 
 require "sinatra/reloader" if development?
 ['actions', 'models', 'policies', 'services', 'views'].each do |dir|

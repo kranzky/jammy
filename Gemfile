@@ -10,6 +10,7 @@ gem 'puma', '~> 3.7.0'
 # HTTP Framework
 gem 'sinatra', '~> 2.0.0.beta2'
 gem 'sinatra-contrib', '~> 2.0.0.beta2'
+gem 'sinatra-cross_origin', '~> 0.4.0'
 gem 'request_store', '~> 1.3.2'
 
 # ORM
