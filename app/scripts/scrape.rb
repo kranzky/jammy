@@ -378,15 +378,32 @@ def scrape_country
   end
 end
 
-# TODO: add key for sorting (filename of URL)
+def slugify
+  Models::Game.all do |game|
+    next if game.slug.present?
+    game.slug = game.name.slugify
+    game.slug = nil if game.slug.blank?
+    game.save
+  end
+end
+
+def scrape_description
+  Models::Game.all.each do |game|
+    next if game.description.present?
+    next unless response = RestClient.get(game.url)
+    doc = Nokogiri::HTML(response.body)
+    game.description = doc.css("div.field--name-field-game-about").text
+    game.save
+  end
+end
+
+scrape_description
 
 # TODO: deal with delete/check/html5 games and eyeball the others
 
-# TODO: scrape description so we can show inline, in a pop-up with tabs
+# TODO: recheck image URLs
 
-# TODO: build UX (sidebar with controls, search box at top, infinite scroll with back-to-top, dialog on click with slider to show info, video, play, with full screen controls)
-
-# TODO: add rating and share to twitter
+# TODO: add games from earlier years
 
 # TODO: update these stats: (official, screenshot, plus video, plus play now)
 #   + 2017: 7260,5509,925,790

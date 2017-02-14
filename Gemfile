@@ -34,6 +34,7 @@ group :development do
   gem 'gemfile_updater', '~> 0.1.0'
   gem 'nokogiri', '~> 1.7.0.1'
   gem 'rest-client', '~> 2.0.0'
+  gem 'slugify', '~> 1.0.7'
   gem 'video_info', '~> 2.7'
 end
 
