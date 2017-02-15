@@ -259,8 +259,7 @@ def check_videos
 end
 
 def check_images
-  Models::Game.each do |game|
-    next if game.id < 3170
+  Models::Game.order(:id).each do |game|
     code = check(game.image)
     puts "#{game.id}:#{code}:#{game.name}"
     next if code == 200
@@ -390,24 +389,26 @@ end
 def scrape_description
   Models::Game.all.each do |game|
     next if game.description.present?
-    next unless response = RestClient.get(game.url)
+    next unless response = RestClient.get(game.url) rescue nil
     doc = Nokogiri::HTML(response.body)
     game.description = doc.css("div.field--name-field-game-about").text
     game.save
   end
 end
 
-scrape_description
+check_images
 
+# TODO: remove duplicates (similar names, eyeball and manually delete)
 # TODO: deal with delete/check/html5 games and eyeball the others
-
-# TODO: recheck image URLs
-
 # TODO: add games from earlier years
-
 # TODO: update these stats: (official, screenshot, plus video, plus play now)
 #   + 2017: 7260,5509,925,790
 #   + 2016: 6867,4376,611,679
 #   + 2015: 5438,3525,556,844
 #   + 2014: 4284,2759,443,819
-#   + tots: 23849,16169,2535,3144
+#   + 2013: 3141,?,?,?
+#   + 2012: 2202,?,?,?
+#   + 2011: 1482,?,?,?
+#   + 2010: 929,?,?,?
+#   + 2009: 377,?,?,?
+#   + tots: ?,?,?,?

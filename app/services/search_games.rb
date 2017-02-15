@@ -5,7 +5,13 @@ module App::Services
     result :games
 
     def perform
-      self.games = Models::Game.offset(100 * (page - 1)).limit(100).order(:slug, :name).all
+      self.games =
+        Models::Game
+          .where(Sequel.ilike(:name, "%#{query}%"))
+          .offset(100 * (page - 1))
+          .limit(100)
+          .order(:slug, :name)
+          .all
     end
 
     # validate page >= 1

@@ -1,14 +1,12 @@
 <template>
   <q-layout>
     <div slot="header" class="toolbar">
-      <q-toolbar-title>
-        Jammy Browser
-      </q-toolbar-title>
+      <q-search v-model="query" @input="searchGames"></q-search>
     </div>
     <div class="layout-view">
       <q-pull-to-refresh :handler="refresh" class="games">
         <q-infinite-scroll class="justify-center" ref="infiniteScroll" :handler="loadMore">
-          <div class="list item-inset-delimiter highlight">
+          <div class="list item-inset-delimiter highlight" id="scrollArea">
             <div class="game item three-lines" v-for="game in games">
               <img class="item-primary responsive thumbnail" :src="game.image">
               <div class="item-content has-secondary">
@@ -26,7 +24,7 @@
           <spinner slot="message" :size="40"></spinner>
         </q-infinite-scroll>
       </q-pull-to-refresh>
-      <button v-back-to-top.animate="{offset: 500, duration: 200}" class="primary circular fixed-bottom-right animate-pop" style="margin: 0 15px 15px 0">
+      <button v-back-to-top.animate="{ duration: 200 }" class="primary circular fixed-bottom-right animate-pop" style="margin: 0 15px 15px 0">
         <i>keyboard_arrow_up</i>
       </button>
     </div>
@@ -34,36 +32,46 @@
 </template>
 
 <script>
-  // TODO: flags
-  // TODO: implement search and filters
-  // TODO: implement login (twitter) and ratings and sort by rating and apps // I've rated filter
-  // TODO: implement popup on click
-  // TODO: finish scraping
-  // TODO: shipit
   import axios from 'axios'
+  import { Utils } from 'quasar'
   export default {
     data () {
       return {
-        games: []
+        games: [],
+        query: ''
       }
     },
     mounted () {
     },
     methods: {
       refresh (callback) {
-        this.games = []
         this.loadMore(1, callback)
       },
-      loadMore (page, callback) {
+      searchGames () {
+        var element = document.getElementById('scrollArea')
+        Utils.dom.setScrollPosition(Utils.dom.getScrollTarget(element), 0, 200)
+        this.loadMore()
+      },
+      loadMore (page = 1, callback = null) {
         let options = {
-          headers: { 'Content-Type': 'application/json' },
-          params: { page: page }
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          params: {
+            query: this.query,
+            page: page
+          }
         }
         // let url = '/api/games'
         let url = 'http://gamejam.dev/api/games'
         axios.get(url, options).then(response => {
+          if (page === 1) {
+            this.games = []
+          }
           this.games.push.apply(this.games, response.data)
-          callback(response.data.length < 100)
+          if (callback) {
+            callback(response.data.length < 100)
+          }
         })
       }
     }
@@ -81,4 +89,6 @@
   .games .q-spinner
     margin: auto
     display: block
+    margin-top: 20px
+    margin-bottom: 20px
 </style>
