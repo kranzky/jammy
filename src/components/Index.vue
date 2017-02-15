@@ -17,7 +17,7 @@
                 {{ game.year }}
               </div>
               <div class="item-secondary stamp">
-                <div>{{ game.country }}</div>
+              	<img class="flag flag-au" alt="AU" src="statics/blank.png">
               </div>
             </div>
           </div>
@@ -33,7 +33,7 @@
 
 <script>
   import axios from 'axios'
-  import { Utils } from 'quasar'
+  import { Toast, Utils } from 'quasar'
   export default {
     data () {
       return {
@@ -69,6 +69,9 @@
             this.games = []
           }
           this.games.push.apply(this.games, response.data)
+          if (page === 1 && this.games.length === 0) {
+            Toast.create.warning('No games found.')
+          }
           if (callback) {
             callback(response.data.length < 100)
           }
