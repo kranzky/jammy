@@ -45,7 +45,7 @@
           }
         }
         // let url = '/api/games'
-        let url = 'http://gamejam.dev/api/games'
+        let url = 'http://jammy.dev/api/games'
         axios.get(url, options).then(response => {
           if (page === 1) {
             this.$store.commit('clearGames')
