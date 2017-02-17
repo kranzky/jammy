@@ -13,6 +13,8 @@ module Rote
       logger.info "Processing by #{action_class.name.gsub('App::Actions::', '')} as #{format.upcase}"
       logger.trace "Parameters: #{params}"
       action = action_class.new(params)
+      logger.info action.query
+      logger.info action.page
       raise Error, "bad action" unless action.is_a?(Action)
       raise Error, action.errors unless action.valid?
       view = action.respond
@@ -89,10 +91,12 @@ module Rote
   end
 
   class Action < Base
-    def self.param(name, default=nil)
+    include Virtus.model(constructor: false, mass_assignment: false)
+
+    def self.param(name, type, default=nil)
       raise Error, "bad action param" unless name.is_a?(Symbol)
       Thread.current[:rote][self.name][name] = default
-      define_method(name, ->{ @context[name] })
+      self.attribute(name, type, default: default)
     end
 
     def self.decorate_methods
@@ -113,7 +117,8 @@ module Rote
       super()
       @context.keys.each do |key|
         next unless params[key]
-        @context[key] = params[key]
+        self.send("#{key}=", params[key])
+        @context[key] = self.send(key)
       end
       @success = true
       @responded = false

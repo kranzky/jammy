@@ -1,13 +1,12 @@
 module App::Actions::Games
   class Search < Rote::Action
-    # TODO: type conversion, maybe via virtus
-    param :query, ''
-    param :page
+    param :query, String, ''
+    param :page, Integer, 1
 
     def respond
       perform "search games"
+      # render games: "list"
       render Views::Games::List
-      # render "games list"
     end
 
     # validate page >= 1

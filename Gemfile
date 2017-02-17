@@ -27,6 +27,7 @@ gem 'semantic_logger', '~> 3.4.1'
 gem 'jbuilder', '~> 2.6.1'
 gem 'yajl-ruby', '~> 1.3.0'
 gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
+gem 'virtus', '~> 1.0.5'
 
 group :development do
   gem 'countries', '~> 2.0.6'
