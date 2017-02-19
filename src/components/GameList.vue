@@ -1,21 +1,26 @@
 <template>
-  <q-pull-to-refresh :handler="refresh" class="games">
-    <q-infinite-scroll class="justify-center" ref="infiniteScroll" :handler="loadMore">
-      <div class="list item-inset-delimiter highlight" id="scrollArea">
-        <game-item v-for="game in games" :game="game"></game-item>
-      </div>
-      <spinner slot="message" :size="40"></spinner>
-    </q-infinite-scroll>
-  </q-pull-to-refresh>
+  <div>
+    <game-details></game-details>
+    <q-pull-to-refresh :handler="refresh" class="games">
+      <q-infinite-scroll class="justify-center" ref="infiniteScroll" :handler="loadMore">
+        <div class="list item-inset-delimiter highlight" id="scrollArea">
+          <game-item v-for="game in games" :game="game"></game-item>
+        </div>
+        <spinner slot="message" :size="40"></spinner>
+      </q-infinite-scroll>
+    </q-pull-to-refresh>
+  </div>
 </template>
 
 <script>
   import axios from 'axios'
   import { Toast, Utils } from 'quasar'
   import GameItem from 'components/GameItem.vue'
+  import GameDetails from 'components/GameDetails.vue'
   export default {
     components: {
-      GameItem
+      GameItem: GameItem,
+      GameDetails: GameDetails
     },
     computed: {
       games () {

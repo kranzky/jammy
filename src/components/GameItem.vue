@@ -1,5 +1,5 @@
 <template>
-  <div class="game item three-lines">
+  <div class="game item three-lines" @click="showGame">
     <img class="item-primary responsive thumbnail shadow-3" :src="game.image">
     <div class="item-content has-secondary">
       <div>{{ game.name }}</div>
@@ -24,6 +24,11 @@
     computed: {
       flag () {
         return `flag flag-${this.game.country.toLowerCase()}`
+      }
+    },
+    methods: {
+      showGame () {
+        this.$bus.$emit('show-game', this.game)
       }
     }
   }
