@@ -50,13 +50,6 @@
 <script>
   import Vue from 'vue'
 
-  // TODO: select info tab by default
-  // TODO: stop video/game when tab unselected or when modal closed
-  // TODO: request slider fullscreen by default when game tab selected
-  // TODO: autoplay video on select
-  // TODO: show flag
-  // TODO: URLs for sharing, and sharing button
-
   export default {
     data () {
       return {

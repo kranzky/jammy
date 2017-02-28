@@ -398,9 +398,6 @@ end
 
 check_images
 
-# TODO: deal with delete/check/html5 games and eyeball the others
-# TODO: remove duplicates (similar names, eyeball and manually delete)
-# TODO: add games from earlier years
 # TODO: update these stats: (official, screenshot, plus video, plus play now)
 #   + 2017: 7260,5509,925,790
 #   + 2016: 6867,4376,611,679
