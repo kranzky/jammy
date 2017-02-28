@@ -1,5 +1,4 @@
-// require(`./themes/app.${__THEME}.styl`)
-require(`quasar/dist/quasar.${__THEME}.css`)
+require(`./themes/app.${__THEME}.styl`)
 require(`assets/flags.css`)
 
 import Vue from 'vue'

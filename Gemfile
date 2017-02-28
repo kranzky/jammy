@@ -5,7 +5,7 @@ ruby '2.3.3'
 gem 'require_all', '~> 1.4.0'
 
 # Rack Server
-gem 'puma', '~> 3.7.0'
+gem 'puma', '~> 3.7.1'
 
 # HTTP Framework
 gem 'sinatra', '~> 2.0.0.beta2'
@@ -24,17 +24,17 @@ gem 'sequel_pg', '~> 1.6.17', require: false
 gem 'semantic_logger', '~> 3.4.1'
 
 # JSON Rendering
-gem 'jbuilder', '~> 2.6.1'
+gem 'jbuilder', '~> 2.6.3'
 gem 'yajl-ruby', '~> 1.3.0'
 gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
 gem 'virtus', '~> 1.0.5'
 
 group :development do
-  gem 'countries', '~> 2.0.6'
+  gem 'countries', '~> 2.0.7'
   gem 'github_changelog_generator', '~> 1.14.3'
   gem 'gemfile_updater', '~> 0.1.0'
   gem 'nokogiri', '~> 1.7.0.1'
-  gem 'rest-client', '~> 2.0.0'
+  gem 'rest-client', '~> 2.0.1'
   gem 'slugify', '~> 1.0.7'
   gem 'video_info', '~> 2.7'
 end
