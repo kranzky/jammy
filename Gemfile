@@ -1,27 +1,27 @@
 source 'https://rubygems.org'
 
 # Language
-ruby '2.3.3'
+ruby '2.3.4'
 gem 'require_all', '~> 1.4.0'
 
 # Rack Server
-gem 'puma', '~> 3.7.1'
+gem 'puma', '~> 3.8.2'
 
 # HTTP Framework
-gem 'sinatra', '~> 2.0.0.beta2'
-gem 'sinatra-contrib', '~> 2.0.0.beta2'
+gem 'sinatra', '~> 2.0.0.rc2'
+gem 'sinatra-contrib', '~> 2.0.0.rc2'
 gem 'sinatra-cross_origin', '~> 0.4.0'
 gem 'request_store', '~> 1.3.2'
 
 # ORM
-gem 'sequel', '~> 4.43.0'
+gem 'sequel', '~> 4.45.0'
 
 # Database
-gem 'pg', '~> 0.19.0'
+gem 'pg', '~> 0.20.0'
 gem 'sequel_pg', '~> 1.6.17', require: false
 
 # Logging
-gem 'semantic_logger', '~> 3.4.1'
+gem 'semantic_logger', '~> 4.0.0'
 
 # JSON Rendering
 gem 'jbuilder', '~> 2.6.3'
@@ -30,10 +30,10 @@ gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
 gem 'virtus', '~> 1.0.5'
 
 group :development do
-  gem 'countries', '~> 2.0.7'
+  gem 'countries', '~> 2.0.8'
   gem 'github_changelog_generator', '~> 1.14.3'
   gem 'gemfile_updater', '~> 0.1.0'
-  gem 'nokogiri', '~> 1.7.0.1'
+  gem 'nokogiri', '~> 1.7.1'
   gem 'rest-client', '~> 2.0.1'
   gem 'slugify', '~> 1.0.7'
   gem 'video_info', '~> 2.7'
